@@ -18,26 +18,18 @@ import Sound from 'react-native-sound';
 const streaming = "http://radio02.ferozo.com/proxy/ra02001292/?mp=/streamQueued";
 
 const App = () => {
-  var radio = new Sound(streaming, null);
-  var radioIsActive = false;
-  var radioStop = false;
+  var radio = new Sound(streaming, Sound.MAIN_BUNDLE);
 
   useEffect(() => {
     radio.setVolume(0.5);
   }, [])
 
   const playRadio = () => {
-    if (radioIsActive === false && radioStop === false) {
-      radio.play();
-      radioIsActive = true;
-      console.log(radioIsActive, radio._volume)
-    }
+    radio.play();
   }
 
-  const stopRadio = () => {
+  const pauseRadio = () => {
     radio.pause();
-    radioIsActive = false;
-    console.log(radioIsActive)
   }
 
   const handleVolumen = (value) => {
@@ -57,7 +49,7 @@ const App = () => {
         </View>
         <View style={styles.buttonContainer}>
           <Button title="play" onPress={() => playRadio()} />
-          <Button title="stop" onPress={() => stopRadio()} />
+          <Button title="pause" onPress={() => pauseRadio()} />
         </View>
         <Slider
           minimumValue={0}
