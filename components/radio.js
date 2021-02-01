@@ -17,31 +17,32 @@ import Sound from 'react-native-sound';
 const Radio = (props) => {
     const streaming = "http://radio02.ferozo.com/proxy/ra02001292/?mp=/streamQueued";
 
-    var radio = new Sound(streaming, Sound.MAIN_BUNDLE);
-    const [count, setCount] = useState("unmounted")
+    const radio = new Sound(streaming, Sound.MAIN_BUNDLE);
+
     useEffect(() => {
         radio.setVolume(0.5);
-        setCount("mounted")
-    }, [])
-
-    console.log(count)
+        console.log("Mounted")
+    }, []);
 
     const playRadio = () => {
         radio.play();
-    }
+        console.log("Play")
+    };
 
     const pauseRadio = () => {
+        console.log("Pause")
         radio.pause();
-    }
+    };
 
     const stopRadio = () => {
-        radio.stop();
+        console.log("Stop")
+        radio.pause();
         props.handleCount();
-    }
+    };
 
     const handleVolumen = (value) => {
         radio.setVolume(value);
-    }
+    };
 
     return (
         <SafeAreaView>
